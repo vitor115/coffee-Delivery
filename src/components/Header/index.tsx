@@ -1,8 +1,9 @@
 import logo from '../../assets/coffee-logo.svg'
-import { CartButton, Container, LocationButton } from './styles'
+import { CartButton, Container, ItemsCount, LocationButton } from './styles'
 import { ShoppingCart, MapPin } from 'phosphor-react'
 
 export function Header() {
+  const cartItemsCounter = 0
   return (
     <Container>
       <img src={logo} alt="Logo" />
@@ -13,6 +14,13 @@ export function Header() {
         </LocationButton>
         <CartButton title="Carrinho">
           <ShoppingCart size={22} weight="fill" />
+          <div>
+            {cartItemsCounter ? (
+              <ItemsCount>{cartItemsCounter || ''}</ItemsCount>
+            ) : (
+              ''
+            )}
+          </div>
         </CartButton>
       </nav>
     </Container>

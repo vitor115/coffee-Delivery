@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 2rem 10rem;
@@ -13,6 +13,10 @@ export const Container = styled.div`
     align-items: center;
     gap: 4px;
   }
+
+  /*   @media only screen and (max-width: 750px) {
+    justify-content: space-evenly;
+  } */
 `
 export const CartButton = styled.button`
   display: flex;
@@ -41,4 +45,21 @@ export const LocationButton = styled.div`
   p {
     color: ${(props) => props.theme.colors['purple-dark']};
   }
+`
+export const ItemsCount = styled.span`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 150px;
+  top: 28px;
+  background-color: ${(props) => props.theme.colors['yellow-dark']};
+  border-radius: 100%;
+  color: ${(props) => props.theme.colors['base-button']};
+  font-weight: bold;
 `
