@@ -7,6 +7,10 @@ export const Container = styled.div`
   width: 100%;
   padding: 2rem 10rem;
 
+  @media (max-width: 1100px) {
+    padding: 2rem;
+  }
+
   nav {
     display: flex;
     justify-content: center;
