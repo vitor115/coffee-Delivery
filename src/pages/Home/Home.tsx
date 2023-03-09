@@ -1,11 +1,15 @@
 import { Banner } from './components/Banner'
-import { Container } from './styles'
+import { ItemCard } from './components/ItemCard'
+import { Container, ItemsList } from './styles'
 
 export function Home() {
   return (
     <Container>
       <Banner />
       <h2>Nossos Cafés</h2>
+      <ItemsList>
+        <ItemCard />
+      </ItemsList>
     </Container>
   )
 }
