@@ -68,6 +68,12 @@ export const AddToCartButton = styled.button`
   min-height: 2.375rem;
   border: none;
   border-radius: 6px;
+  transition: 0.3s background-color;
+
+  :hover {
+    cursor: pointer;
+    background: ${(props) => props.theme.colors.purple};
+  }
 `
 export const Acumulator = styled.div`
   display: flex;
@@ -80,6 +86,13 @@ export const Acumulator = styled.div`
   border-radius: 6px;
   color: ${(props) => props.theme.colors.purple};
   background: ${(props) => props.theme.colors['base-button']};
+  transition: all 0.3s;
+
+  #plus:hover,
+  #minus:hover {
+    cursor: pointer;
+    color: ${(props) => props.theme.colors['purple-dark']};
+  }
 
   #counter {
     color: ${(props) => props.theme.colors['base-title']};

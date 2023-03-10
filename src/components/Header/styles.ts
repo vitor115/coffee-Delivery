@@ -32,6 +32,13 @@ export const CartButton = styled.button`
   border-radius: 6px;
   background-color: ${(props) => props.theme.colors['yellow-light']};
   color: ${(props) => props.theme.colors['yellow-dark']};
+  transition: 0.3s background;
+
+  :hover {
+    cursor: pointer;
+    background-color: ${(props) => props.theme.colors['yellow-dark']};
+    color: ${(props) => props.theme.colors['yellow-light']};
+  }
 `
 export const LocationButton = styled.div`
   height: 2.37rem;

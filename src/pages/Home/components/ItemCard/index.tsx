@@ -18,9 +18,9 @@ export function ItemCard() {
         </div>
 
         <Acumulator>
-          <Minus />
+          <Minus id="minus" />
           <span id="counter">1</span>
-          <Plus />
+          <Plus id="plus" />
         </Acumulator>
         <AddToCartButton type="submit">
           <ShoppingCartSimple weight="fill" color="white" size={22} />
