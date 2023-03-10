@@ -9,6 +9,10 @@ export function Home() {
       <h2>Nossos Cafés</h2>
       <ItemsList>
         <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
+        <ItemCard />
       </ItemsList>
     </Container>
   )

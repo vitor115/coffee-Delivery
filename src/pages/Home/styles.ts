@@ -14,4 +14,19 @@ export const Container = styled.div`
     padding: 2rem;
   }
 `
-export const ItemsList = styled.div``
+export const ItemsList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1150px;
+
+  @media (max-width: 620px) {
+    justify-content: center;
+  }
+  > * {
+  }
+`

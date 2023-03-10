@@ -43,7 +43,7 @@ export function Banner() {
           </div>
         </GridContainer>
       </article>
-      <img src={bannerImage} alt="" />
+      <img src={bannerImage} alt="" id="bannerimage" />
     </BannerContainer>
   )
 }

@@ -10,6 +10,9 @@ export const Container = styled.div`
   @media (max-width: 1100px) {
     padding: 2rem;
   }
+  @media (max-width: 350px) {
+    padding: 1rem;
+  }
 
   nav {
     display: flex;
@@ -17,10 +20,6 @@ export const Container = styled.div`
     align-items: center;
     gap: 4px;
   }
-
-  /*   @media only screen and (max-width: 750px) {
-    justify-content: space-evenly;
-  } */
 `
 export const CartButton = styled.button`
   display: flex;

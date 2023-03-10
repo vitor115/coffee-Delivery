@@ -46,16 +46,28 @@ export const BannerContainer = styled.div`
     font-size: 1.25rem;
     color: ${(props) => props.theme.colors['base-subtitle']};
   }
+
+  @media (max-width: 1100px) {
+    #bannerimage {
+      max-width: 100%;
+    }
+  }
 `
 export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 4rem 3.25rem;
   margin-top: 4.125rem;
 
   div {
     display: flex;
+
     gap: 0.75rem;
     margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 1100px) {
+    grid-template-rows: 1fr 1fr;
   }
 `
 export const GridIcon = styled.div<GridIconProps>`
@@ -66,6 +78,7 @@ export const GridIcon = styled.div<GridIconProps>`
   min-height: 2rem;
   max-height: 2rem;
   border-radius: 50%;
+  margin-bottom: 1.75rem;
   background-color: ${(props) =>
     props.theme.colors[iconColorVariants[props.variant]]};
 `
