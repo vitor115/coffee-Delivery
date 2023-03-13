@@ -1,20 +1,36 @@
 import { ShoppingCartSimple, Minus, Plus } from 'phosphor-react'
-import { Acumulator, AddToCartButton, CardContainer, ItemTag } from './styles'
-import expresso from '../../../../assets/coffee-types/expresso.svg'
+import {
+  Acumulator,
+  AddToCartButton,
+  CardContainer,
+  ItemTag,
+  ItemTagContainer,
+} from './styles'
+import { Item } from '../../../../context/ItemsContext'
 
-export function ItemCard() {
+interface ItemCardProps {
+  item: Item
+}
+
+export function ItemCard({ item }: ItemCardProps) {
   return (
     <CardContainer>
       <header>
-        <img src={expresso} alt="" />
-        <ItemTag>TRADICIONAL</ItemTag>
-        <h3>Expresso Tradicional</h3>
-        <p>O tradicional café feito com água quente e grãos moídos</p>
+        <img src={item.image} alt="" />
+        <ItemTagContainer>
+          {item.category.map((category) => {
+            return <ItemTag key={category}>{category.toUpperCase()}</ItemTag>
+          })}
+        </ItemTagContainer>
+        <h3>{item.name}</h3>
+        <p>{item.description}</p>
       </header>
       <footer>
         <div>
           <span>R$</span>
-          <span id="price">9,90</span>
+          <span id="price">
+            {item.price.toFixed(2).toString().replace('.', ',')}
+          </span>
         </div>
 
         <Acumulator>

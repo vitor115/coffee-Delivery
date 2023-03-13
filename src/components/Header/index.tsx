@@ -4,7 +4,7 @@ import { ShoppingCart, MapPin } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
 
 export function Header() {
-  const cartItemsCounter = 0
+  const cartItemsCounter = 1
   return (
     <Container>
       <NavLink to="/">

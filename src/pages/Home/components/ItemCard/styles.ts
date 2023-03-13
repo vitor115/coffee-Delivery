@@ -23,6 +23,7 @@ export const CardContainer = styled.div`
     }
     p {
       color: ${(props) => props.theme.colors['base-label']};
+      text-align: center;
     }
   }
 
@@ -96,5 +97,16 @@ export const Acumulator = styled.div`
 
   #counter {
     color: ${(props) => props.theme.colors['base-title']};
+  }
+`
+export const ItemTagContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  * {
+    font-size: 0.625rem;
   }
 `
