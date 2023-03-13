@@ -72,4 +72,15 @@ export const ItemsCount = styled.span`
   border-radius: 100%;
   color: ${(props) => props.theme.colors['base-button']};
   font-weight: bold;
+
+  @media (max-width: 1100px) {
+    position: absolute;
+    right: 20px;
+    top: 28px;
+  }
+  @media (max-width: 350px) {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 `

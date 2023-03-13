@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import americano from '../assets/coffee-types/americano.svg'
 import arabe from '../assets/coffee-types/arabe.svg'
@@ -22,10 +22,13 @@ export interface Item {
   price: number
   image: string
   category: [string]
+  quantity?: number
 }
 
 interface ItemsContextType {
   itemsList: Item[]
+  checkoutList: Item[]
+  addToCheckoutList: (item: Item) => void
 }
 export const ItemsContext = createContext({
   itemsList: [
@@ -154,8 +157,15 @@ interface ItemsContextProviderProps {
 }
 export function ItemsContextProvider({ children }: ItemsContextProviderProps) {
   const { itemsList } = useContext(ItemsContext)
+  const [checkoutList, setChekoutList] = useState<Item[]>([])
+
+  function addToCheckoutList(item: Item) {
+    setChekoutList([...checkoutList, item])
+  }
   return (
-    <ItemsContext.Provider value={{ itemsList }}>
+    <ItemsContext.Provider
+      value={{ itemsList, checkoutList, addToCheckoutList }}
+    >
       {children}
     </ItemsContext.Provider>
   )

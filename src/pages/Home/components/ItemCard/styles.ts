@@ -89,6 +89,12 @@ export const Acumulator = styled.div`
   background: ${(props) => props.theme.colors['base-button']};
   transition: all 0.3s;
 
+  button {
+    border: none;
+    background: none;
+    color: ${(props) => props.theme.colors.purple};
+  }
+
   #plus:hover,
   #minus:hover {
     cursor: pointer;

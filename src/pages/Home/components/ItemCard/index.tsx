@@ -6,13 +6,35 @@ import {
   ItemTag,
   ItemTagContainer,
 } from './styles'
-import { Item } from '../../../../context/ItemsContext'
+import { Item, ItemsContext } from '../../../../context/ItemsContext'
+import { useContext, useState } from 'react'
 
 interface ItemCardProps {
   item: Item
 }
 
 export function ItemCard({ item }: ItemCardProps) {
+  const { addToCheckoutList } = useContext(ItemsContext)
+  const [itemQuantity, setItemQuantity] = useState(0)
+
+  function handleAddToCart() {
+    if (itemQuantity > 0) {
+      const itemWithQuantity = { ...item, quantity: itemQuantity }
+      addToCheckoutList(itemWithQuantity)
+      setItemQuantity(0)
+    }
+  }
+  function reduceItemQuantity() {
+    if (itemQuantity > 0) {
+      setItemQuantity(itemQuantity - 1)
+    }
+  }
+  function increaseItemQuantity() {
+    if (itemQuantity < 99) {
+      setItemQuantity(itemQuantity + 1)
+    }
+  }
+
   return (
     <CardContainer>
       <header>
@@ -34,11 +56,16 @@ export function ItemCard({ item }: ItemCardProps) {
         </div>
 
         <Acumulator>
-          <Minus id="minus" />
-          <span id="counter">1</span>
-          <Plus id="plus" />
+          <button onClick={reduceItemQuantity}>
+            <Minus id="minus" />
+          </button>
+
+          <span id="counter">{itemQuantity}</span>
+          <button value={itemQuantity} onClick={increaseItemQuantity}>
+            <Plus id="plus" />
+          </button>
         </Acumulator>
-        <AddToCartButton type="submit">
+        <AddToCartButton type="button" onClick={handleAddToCart}>
           <ShoppingCartSimple weight="fill" color="white" size={22} />
         </AddToCartButton>
       </footer>

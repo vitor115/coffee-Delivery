@@ -2,9 +2,22 @@ import logo from '../../assets/coffee-logo.svg'
 import { CartButton, Container, ItemsCount, LocationButton } from './styles'
 import { ShoppingCart, MapPin } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { ItemsContext } from '../../context/ItemsContext'
 
 export function Header() {
-  const cartItemsCounter = 1
+  const { checkoutList } = useContext(ItemsContext)
+  useEffect(() => {}, [checkoutList])
+  function itemsQuantityInCheckout() {
+    let totalQuantity = 0
+    // eslint-disable-next-line array-callback-return
+    checkoutList.map((item) => {
+      if (item.quantity) {
+        totalQuantity += item.quantity
+      }
+    })
+    return totalQuantity
+  }
   return (
     <Container>
       <NavLink to="/">
@@ -19,8 +32,8 @@ export function Header() {
           <CartButton title="Carrinho">
             <ShoppingCart size={22} weight="fill" />
             <div>
-              {cartItemsCounter ? (
-                <ItemsCount>{cartItemsCounter || ''}</ItemsCount>
+              {checkoutList.length ? (
+                <ItemsCount>{itemsQuantityInCheckout() || ''}</ItemsCount>
               ) : (
                 ''
               )}
