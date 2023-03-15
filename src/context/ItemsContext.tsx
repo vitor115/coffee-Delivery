@@ -29,6 +29,7 @@ interface ItemsContextType {
   itemsList: Item[]
   checkoutList: Item[]
   addToCheckoutList: (item: Item) => void
+  updateItemQuantity: (Item: Item, ItemQuantity: number) => void
 }
 export const ItemsContext = createContext({
   itemsList: [
@@ -162,9 +163,19 @@ export function ItemsContextProvider({ children }: ItemsContextProviderProps) {
   function addToCheckoutList(item: Item) {
     setChekoutList([...checkoutList, item])
   }
+  function updateItemQuantity(Item: Item, ItemQuantity: number) {
+    setChekoutList(
+      checkoutList.map((item) => {
+        if (item.id === Item.id) {
+          return { ...item, quantity: item.quantity + ItemQuantity }
+        }
+        return item
+      }),
+    )
+  }
   return (
     <ItemsContext.Provider
-      value={{ itemsList, checkoutList, addToCheckoutList }}
+      value={{ itemsList, checkoutList, addToCheckoutList, updateItemQuantity }}
     >
       {children}
     </ItemsContext.Provider>

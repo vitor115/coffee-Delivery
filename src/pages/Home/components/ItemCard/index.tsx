@@ -14,15 +14,21 @@ interface ItemCardProps {
 }
 
 export function ItemCard({ item }: ItemCardProps) {
-  const { addToCheckoutList } = useContext(ItemsContext)
+  const { addToCheckoutList, checkoutList, updateItemQuantity } =
+    useContext(ItemsContext)
   const [itemQuantity, setItemQuantity] = useState(0)
 
   function handleAddToCart() {
+    const isItemOnCheckout = checkoutList.map((i) => i.id).indexOf(item.id)
     if (itemQuantity > 0) {
-      const itemWithQuantity = { ...item, quantity: itemQuantity }
-      addToCheckoutList(itemWithQuantity)
-      setItemQuantity(0)
+      if (isItemOnCheckout === -1) {
+        const itemWithQuantity = { ...item, quantity: itemQuantity }
+        addToCheckoutList(itemWithQuantity)
+      } else {
+        updateItemQuantity(item, itemQuantity)
+      }
     }
+    setItemQuantity(0)
   }
   function reduceItemQuantity() {
     if (itemQuantity > 0) {
