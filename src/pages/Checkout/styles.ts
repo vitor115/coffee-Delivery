@@ -164,23 +164,36 @@ export const PaymentInfo = styled(InfoContainer)`
     justify-content: flex-start;
     gap: 0.5rem;
   }
-`
 
-export const PaymentMethodButton = styled.button`
+  #buttonInput {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+`
+interface PaymentMethodButtonProps {
+  checked?: boolean
+}
+
+export const PaymentMethodButton = styled.button<PaymentMethodButtonProps>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 0.75rem;
-  background: ${(props) => props.theme.colors['base-button']};
-  border: none;
+  background: ${(props) =>
+    props.checked
+      ? props.theme.colors['purple-light']
+      : props.theme.colors['base-button']};
+  border: ${(props) =>
+    props.checked ? '1px solid' + props.theme.colors.purple : 'none'};
   border-radius: 6px;
   min-width: 10.5rem;
   padding: 1rem;
   transition: all 0.3s;
 
   :hover {
-    background: ${(props) => props.theme.colors['purple-light']};
-    outline: ${(props) => props.theme.colors['purple-dark']};
+    background: ${(props) =>
+      props.checked ? '' : props.theme.colors['base-hover']};
   }
 
   > :first-child {
@@ -191,3 +204,6 @@ export const PaymentMethodButton = styled.button`
     font-size: 0.75rem;
   }
 `
+PaymentMethodButton.defaultProps = {
+  checked: false,
+}
