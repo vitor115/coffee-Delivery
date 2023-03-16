@@ -5,11 +5,12 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ItemsContext } from '../../context/ItemsContext'
 import { ItemCart } from './components/ItemCart/ItemCart'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
 
 import { number, object, string } from 'yup'
 
@@ -34,13 +35,17 @@ const schema = object({
   bairro: string().required('Digite o Bairro da residência'),
   cidade: string().required('Digite a Cidade da residência'),
   uf: string().required('Digite o Estado da cidade'),
-  paymentMethod: string().required('Escolha um tipo de pagamento'),
 })
 
 export function Checkout() {
-  const { checkoutList } = useContext(ItemsContext)
+  const { checkoutList, clearCheckoutList, addToOrderInfo } =
+    useContext(ItemsContext)
   const [selectedButton, setSelectedButton] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState('credit')
+  const navigate = useNavigate()
+  const storedItems = JSON.parse(
+    localStorage.getItem('@coffee-felivery:checkoutList-1.0.0'),
+  )
   const {
     register,
     handleSubmit,
@@ -76,8 +81,19 @@ export function Checkout() {
 
   /*   const { addToCheckoutList } = useContext(ItemsContext) */
   function sendCartInformation(data: any) {
-    console.log(data)
+    const itemsId = checkoutList.map((item) => item.id)
+    const allDeliveryData = {
+      ...data,
+      itemsId,
+      totalPriceWithDeliveryFee,
+      paymentMethod,
+    }
+    clearCheckoutList()
+    addToOrderInfo(allDeliveryData)
+
+    navigate('/success')
   }
+
   function alertErrors() {
     if (errors.cep) {
       alert(errors.cep.message)
@@ -120,7 +136,6 @@ export function Checkout() {
             type="text"
             id="numero"
             placeholder="Número"
-            required
             {...register('numero')}
           />
           <input
@@ -180,12 +195,6 @@ export function Checkout() {
               <Money size={16} />
               <p>DINHEIRO</p>
             </PaymentMethodButton>
-            <input
-              type="text"
-              id="buttonInput"
-              {...register('paymentMethod')}
-              value={paymentMethod}
-            />
           </div>
         </PaymentInfo>
       </OrderInfoContainer>

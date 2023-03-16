@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import americano from '../assets/coffee-types/americano.svg'
 import arabe from '../assets/coffee-types/arabe.svg'
@@ -28,8 +34,12 @@ export interface Item {
 interface ItemsContextType {
   itemsList: Item[]
   checkoutList: Item[]
+  orderInfo: {}
+  addToOrderInfo: (order: {}) => void
   addToCheckoutList: (item: Item) => void
   updateItemQuantity: (Item: Item, ItemQuantity: number) => void
+  clearCheckoutList: () => void
+  deleteItem: (Item: Item) => void
 }
 export const ItemsContext = createContext({
   itemsList: [
@@ -156,9 +166,13 @@ export const ItemsContext = createContext({
 interface ItemsContextProviderProps {
   children: ReactNode
 }
+const storedItems = JSON.parse(
+  localStorage.getItem('@coffee-felivery:checkoutList-1.0.0'),
+)
 export function ItemsContextProvider({ children }: ItemsContextProviderProps) {
   const { itemsList } = useContext(ItemsContext)
-  const [checkoutList, setChekoutList] = useState<Item[]>([])
+  const [checkoutList, setChekoutList] = useState<Item[]>(storedItems || [])
+  const [orderInfo, setOrderInfo] = useState({})
 
   function addToCheckoutList(item: Item) {
     setChekoutList([...checkoutList, item])
@@ -173,9 +187,35 @@ export function ItemsContextProvider({ children }: ItemsContextProviderProps) {
       }),
     )
   }
+  function clearCheckoutList() {
+    setChekoutList([])
+  }
+
+  function addToOrderInfo(order: {}) {
+    setOrderInfo(order)
+  }
+  function deleteItem(item: Item) {
+    const listWithoutItem = checkoutList.filter((i) => item.id !== i.id)
+    setChekoutList(listWithoutItem)
+  }
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(checkoutList)
+    localStorage.setItem('@coffee-felivery:checkoutList-1.0.0', stateJSON)
+  }, [checkoutList])
+
   return (
     <ItemsContext.Provider
-      value={{ itemsList, checkoutList, addToCheckoutList, updateItemQuantity }}
+      value={{
+        itemsList,
+        checkoutList,
+        addToCheckoutList,
+        updateItemQuantity,
+        clearCheckoutList,
+        addToOrderInfo,
+        orderInfo,
+        deleteItem,
+      }}
     >
       {children}
     </ItemsContext.Provider>

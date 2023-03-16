@@ -37,9 +37,20 @@ export const ItemCard = styled.div`
   }
 `
 
-export const RemoveButton = styled(Acumulator)`
+export const RemoveButton = styled.button`
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
   flex: 1;
   padding: 0.5rem;
+  background: ${(props) => props.theme.colors['base-button']};
+  border: 0;
+  color: ${(props) => props.theme.colors.purple};
+  border-radius: 6px;
+
+  span {
+    color: ${(props) => props.theme.colors['base-text']};
+  }
 `

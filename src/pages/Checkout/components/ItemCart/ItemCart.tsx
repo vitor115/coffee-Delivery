@@ -8,7 +8,7 @@ interface ItemCartProps {
   item: Item
 }
 export function ItemCart({ item }: ItemCartProps) {
-  const { updateItemQuantity } = useContext(ItemsContext)
+  const { updateItemQuantity, deleteItem } = useContext(ItemsContext)
 
   function reduceItemQuantity() {
     if (item.quantity > 0) {
@@ -19,6 +19,10 @@ export function ItemCart({ item }: ItemCartProps) {
     if (item.quantity < 99) {
       updateItemQuantity(item, 1)
     }
+  }
+
+  function DeleteCurrentItem() {
+    deleteItem(item)
   }
 
   return (
@@ -38,9 +42,9 @@ export function ItemCart({ item }: ItemCartProps) {
                   <Plus id="plus" />
                 </button>
               </Acumulator>
-              <RemoveButton>
-                <span>Remover</span>
+              <RemoveButton type="button" onClick={DeleteCurrentItem}>
                 <Trash size={16} />
+                <span>Remover</span>
               </RemoveButton>
             </div>
           </header>
