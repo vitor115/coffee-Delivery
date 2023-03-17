@@ -8,6 +8,10 @@ export const SuccessContainer = styled.div`
   padding: 5rem 10rem;
   gap: 2.5rem;
 
+  @media (max-width: 1300px) {
+    padding: 1.5rem;
+  }
+
   header {
     h1 {
       font-size: 2rem;
@@ -27,10 +31,22 @@ export const SuccessContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
 
+    @media (max-width: 1000px) {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
     main {
       display: flex;
       flex-direction: column;
       padding: 2.5rem;
+      width: 100%;
+      min-width: 178px;
+      max-width: 30rem;
       gap: 2rem;
       background: linear-gradient(#fafafa, #fafafa) padding-box,
         linear-gradient(to right, #dbac2c, #8047f8) border-box;
@@ -48,6 +64,14 @@ export const SuccessContainer = styled.div`
         > :first-child {
           margin-bottom: 0;
         }
+      }
+
+      @media (max-width: 430px) {
+        padding: 1.5rem;
+      }
+
+      @media (max-width: 320px) {
+        padding: 1rem;
       }
     }
 

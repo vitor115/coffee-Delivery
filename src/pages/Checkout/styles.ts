@@ -15,6 +15,19 @@ export const CheckoutContainer = styled.form`
   padding: 2.5rem 10rem;
   gap: 2rem;
 
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    padding: 2.5rem;
+
+    aside {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 450px) {
+    padding: 0.5rem;
+  }
+
   h2 {
     font-size: 1.125rem;
     font-weight: 700;
@@ -48,6 +61,10 @@ export const CartInfoContainer = styled(Container)`
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 370px) {
+    padding: 1rem;
+  }
 `
 
 export const PricingFooter = styled.footer`
@@ -135,6 +152,39 @@ export const AddressInfo = styled(InfoContainer)`
     grid-area: 5 / 6 / 6 / 7;
   }
 
+  @media (max-width: 470px) {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 6, 1fr;
+
+    #cep {
+      grid-area: 2 / 1 / 3 /6;
+    }
+    #rua {
+      grid-area: 3 / 1 / 4 / 6;
+    }
+    #numero {
+      grid-area: 4 / 1 / 5 / 3;
+    }
+    #complemento {
+      grid-area: 4 / 3 / 5 / 6;
+    }
+    #bairro {
+      grid-area: 5 / 1 / 6 / 6;
+    }
+    #cidade {
+      grid-area: 6 / 1 / 7 / 4;
+    }
+    #uf {
+      grid-area: 6 / 4 / 7 / 6;
+    }
+  }
+  @media (max-width: 350px) {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
   input {
     background: ${(props) => props.theme.colors['base-input']};
     border-radius: 6px;
@@ -163,12 +213,21 @@ export const PaymentInfo = styled(InfoContainer)`
     align-items: center;
     justify-content: flex-start;
     gap: 0.5rem;
+    flex-wrap: wrap;
+
+    @media (max-width: 425px) {
+      justify-content: center;
+    }
   }
 
   #buttonInput {
     visibility: hidden;
     width: 0;
     height: 0;
+  }
+
+  @media (max-width: 370px) {
+    padding: 1rem;
   }
 `
 interface PaymentMethodButtonProps {

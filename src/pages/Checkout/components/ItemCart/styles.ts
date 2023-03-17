@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Acumulator } from '../../../Home/components/ItemCard/styles'
 
 export const ItemCard = styled.div`
   display: flex;
@@ -8,14 +7,22 @@ export const ItemCard = styled.div`
   flex-direction: column;
 
   img {
-    width: 20%;
+    max-width: 20%;
+
+    @media (max-width: 330px) {
+      max-width: 0%;
+    }
   }
 
   > div {
     display: flex;
     width: 100%;
     gap: 1.25rem;
-    justify-content: space-around;
+    justify-content: center;
+
+    @media (max-width: 425px) {
+      gap: 0.5rem;
+    }
   }
   header {
     display: flex;

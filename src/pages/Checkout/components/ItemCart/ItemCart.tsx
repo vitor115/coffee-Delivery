@@ -11,7 +11,7 @@ export function ItemCart({ item }: ItemCartProps) {
   const { updateItemQuantity, deleteItem } = useContext(ItemsContext)
 
   function reduceItemQuantity() {
-    if (item.quantity > 0) {
+    if (item.quantity > 1) {
       updateItemQuantity(item, -1)
     }
   }
@@ -34,11 +34,15 @@ export function ItemCart({ item }: ItemCartProps) {
             <h3>{item.name}</h3>
             <div id="actions">
               <Acumulator>
-                <button onClick={reduceItemQuantity}>
+                <button type="button" onClick={reduceItemQuantity}>
                   <Minus id="minus" />
                 </button>
                 <span id="counter">{item.quantity}</span>
-                <button value={item.quantity} onClick={increaseItemQuantity}>
+                <button
+                  type="button"
+                  value={item.quantity}
+                  onClick={increaseItemQuantity}
+                >
                   <Plus id="plus" />
                 </button>
               </Acumulator>
@@ -50,7 +54,7 @@ export function ItemCart({ item }: ItemCartProps) {
           </header>
 
           <p className="price">
-            R${' '}
+            R$
             {(item.price * item.quantity)
               .toFixed(2)
               .toString()
