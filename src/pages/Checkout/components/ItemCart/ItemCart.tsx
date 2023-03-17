@@ -1,11 +1,11 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { useContext } from 'react'
-import { Item, ItemsContext } from '../../../../context/ItemsContext'
+import { checkoutItems, ItemsContext } from '../../../../context/ItemsContext'
 import { Acumulator } from '../../../Home/components/ItemCard/styles'
 import { RemoveButton, ItemCard } from './styles'
 
 interface ItemCartProps {
-  item: Item
+  item: checkoutItems
 }
 export function ItemCart({ item }: ItemCartProps) {
   const { updateItemQuantity, deleteItem } = useContext(ItemsContext)

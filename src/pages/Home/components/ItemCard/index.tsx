@@ -22,6 +22,7 @@ export function ItemCard({ item }: ItemCardProps) {
     const isItemOnCheckout = checkoutList.map((i) => i.id).indexOf(item.id)
     if (itemQuantity > 0) {
       if (isItemOnCheckout === -1) {
+        console.log(checkoutList)
         const itemWithQuantity = { ...item, quantity: itemQuantity }
         addToCheckoutList(itemWithQuantity)
       } else {

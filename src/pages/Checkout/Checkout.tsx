@@ -5,7 +5,7 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { ItemsContext } from '../../context/ItemsContext'
 import { ItemCart } from './components/ItemCart/ItemCart'
 import { useForm } from 'react-hook-form'
@@ -25,16 +25,16 @@ import {
 } from './styles'
 
 const schema = object({
-  cep: number()
+  zipcode: number()
     .typeError('Digite somente os 8 números do CEP')
     .required('Digite o CEP da residência')
     .positive(),
-  rua: string().required('Digite a Rua da residência'),
-  numero: string().required('Digite o Número da residência'),
-  complemento: string(),
-  bairro: string().required('Digite o Bairro da residência'),
-  cidade: string().required('Digite a Cidade da residência'),
-  uf: string().required('Digite o Estado da cidade'),
+  street: string().required('Digite a Rua da residência'),
+  number: string().required('Digite o Número da residência'),
+  complement: string(),
+  neighborhood: string().required('Digite o Bairro da residência'),
+  city: string().required('Digite a Cidade da residência'),
+  state: string().required('Digite o Estado da cidade'),
 })
 
 export function Checkout() {
@@ -43,9 +43,6 @@ export function Checkout() {
   const [selectedButton, setSelectedButton] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState('credit')
   const navigate = useNavigate()
-  const storedItems = JSON.parse(
-    localStorage.getItem('@coffee-felivery:checkoutList-1.0.0'),
-  )
   const {
     register,
     handleSubmit,
@@ -95,18 +92,18 @@ export function Checkout() {
   }
 
   function alertErrors() {
-    if (errors.cep) {
-      alert(errors.cep.message)
-    } else if (errors.rua) {
-      alert(errors.rua.message)
-    } else if (errors.numero) {
-      alert(errors.numero.message)
-    } else if (errors.bairro) {
-      alert(errors.bairro.message)
-    } else if (errors.cidade) {
-      alert(errors.cidade.message)
-    } else if (errors.uf) {
-      alert(errors.uf.message)
+    if (errors.zipcode) {
+      alert(errors.zipcode.message)
+    } else if (errors.street) {
+      alert(errors.street.message)
+    } else if (errors.number) {
+      alert(errors.number.message)
+    } else if (errors.neighborhood) {
+      alert(errors.neighborhood.message)
+    } else if (errors.city) {
+      alert(errors.city.message)
+    } else if (errors.state) {
+      alert(errors.state.message)
     }
   }
 
@@ -128,35 +125,40 @@ export function Checkout() {
             type="number"
             id="cep"
             placeholder="CEP"
-            {...register('cep')}
+            {...register('zipcode')}
           />
 
-          <input type="text" id="rua" placeholder="Rua" {...register('rua')} />
+          <input
+            type="text"
+            id="rua"
+            placeholder="Rua"
+            {...register('street')}
+          />
           <input
             type="text"
             id="numero"
             placeholder="Número"
-            {...register('numero')}
+            {...register('number')}
           />
           <input
             type="text"
             id="complemento"
             placeholder="Complemento"
-            {...register('complemento')}
+            {...register('complement')}
           />
           <input
             type="text"
             id="bairro"
             placeholder="Bairro"
-            {...register('bairro')}
+            {...register('neighborhood')}
           />
           <input
             type="text"
             id="cidade"
             placeholder="Cidade"
-            {...register('cidade')}
+            {...register('city')}
           />
-          <input type="text" id="uf" placeholder="UF" {...register('uf')} />
+          <input type="text" id="uf" placeholder="UF" {...register('state')} />
         </AddressInfo>
         <PaymentInfo>
           <header>

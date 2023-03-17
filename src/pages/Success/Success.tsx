@@ -8,6 +8,9 @@ import { ItemsContext } from '../../context/ItemsContext'
 export function Success() {
   const { orderInfo } = useContext(ItemsContext)
 
+  useEffect(() => {
+    console.log(orderInfo)
+  }, [orderInfo])
   return (
     <SuccessContainer>
       <header>
@@ -25,12 +28,12 @@ export function Success() {
               <p>
                 Entrega em{' '}
                 <strong>
-                  {orderInfo.rua}, {orderInfo.numero}
+                  {orderInfo.street}, {orderInfo.number}
                 </strong>
               </p>
               <p>
                 {' '}
-                {orderInfo.bairro} - {orderInfo.cidade}, {orderInfo.uf}
+                {orderInfo.neighborhood} - {orderInfo.city}, {orderInfo.state}
               </p>
             </div>
           </div>

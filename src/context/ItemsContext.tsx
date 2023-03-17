@@ -28,15 +28,31 @@ export interface Item {
   price: number
   image: string
   category: [string]
-  quantity?: number
+}
+
+export interface checkoutItems extends Item {
+  quantity: number
+}
+
+type OrderInfoType = {
+  street: string
+  neighborhood: string
+  zipcode: number
+  city: string
+  state: string
+  complement: string
+  itemsId: [string]
+  number: string
+  paymentMethod: string
+  totalPriceWithDeliveryFee: number
 }
 
 interface ItemsContextType {
   itemsList: Item[]
-  checkoutList: Item[]
-  orderInfo: {}
-  addToOrderInfo: (order: {}) => void
-  addToCheckoutList: (item: Item) => void
+  checkoutList: checkoutItems[]
+  orderInfo: OrderInfoType
+  addToOrderInfo: (order: OrderInfoType) => void
+  addToCheckoutList: (item: checkoutItems) => void
   updateItemQuantity: (Item: Item, ItemQuantity: number) => void
   clearCheckoutList: () => void
   deleteItem: (Item: Item) => void
@@ -167,14 +183,27 @@ interface ItemsContextProviderProps {
   children: ReactNode
 }
 const storedItems = JSON.parse(
-  localStorage.getItem('@coffee-felivery:checkoutList-1.0.0'),
+  localStorage.getItem('@coffee-felivery:checkoutList-1.0.0') as string,
 )
 export function ItemsContextProvider({ children }: ItemsContextProviderProps) {
   const { itemsList } = useContext(ItemsContext)
-  const [checkoutList, setChekoutList] = useState<Item[]>(storedItems || [])
-  const [orderInfo, setOrderInfo] = useState({})
+  const [checkoutList, setChekoutList] = useState<checkoutItems[]>(
+    storedItems || [],
+  )
+  const [orderInfo, setOrderInfo] = useState<OrderInfoType>({
+    street: '',
+    zipcode: 0,
+    city: '',
+    state: '',
+    complement: '',
+    itemsId: [''],
+    number: '',
+    paymentMethod: '',
+    totalPriceWithDeliveryFee: 0,
+    neighborhood: '',
+  })
 
-  function addToCheckoutList(item: Item) {
+  function addToCheckoutList(item: checkoutItems) {
     setChekoutList([...checkoutList, item])
   }
   function updateItemQuantity(Item: Item, ItemQuantity: number) {
@@ -191,7 +220,7 @@ export function ItemsContextProvider({ children }: ItemsContextProviderProps) {
     setChekoutList([])
   }
 
-  function addToOrderInfo(order: {}) {
+  function addToOrderInfo(order: typeof orderInfo) {
     setOrderInfo(order)
   }
   function deleteItem(item: Item) {
